@@ -11,12 +11,15 @@ struct IntroFeature: Reducer {
     
     enum State: Equatable {
         case splash(SplashFeature.State = .init())
+        case tabBar(TabBarFeature.State = TabBarFeature.State())
         
         init() { self = .splash() }
     }
     
     enum Action: Equatable {
         case splash(SplashFeature.Action)
+        case tabBar(TabBarFeature.Action)
+        
     }
     
     var body: some ReducerOf<Self> {
@@ -25,11 +28,16 @@ struct IntroFeature: Reducer {
             case .splash(.delegate(let splashDelegate)):
                 switch splashDelegate {
                     case .moveToMain:
-                    return .none
+                    return .run { send in await send(._changeScreen(.tabBar(.init())), animation: .spring()) }
                 }
             case .splash:
                 return .none
+            case .tabBar:
+                return .none
             }
+        }
+        .ifCaseLet(/State.tabBar, action: /Action.tabBar) {
+            TabBarFeature()
         }
     }
 }
