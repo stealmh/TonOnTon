@@ -26,6 +26,7 @@ struct AddColorFeature: Reducer {
         case delegate(Delegate)
         enum Delegate: Equatable {
             case saveButtonTapped(CreateColor)
+            case dismiss
         }
     }
     

@@ -25,10 +25,18 @@ extension AddColorView {
     var body: some View {
         ZStack {
             Color.yellow.opacity(0.1)
+                .ignoresSafeArea()
             VStack {
-                Text("색상 선택")
-                    .font(.largeTitle)
-                    .fontWeight(.semibold)
+                HStack {
+                    Text("색상 선택")
+                        .font(.largeTitle)
+                        .fontWeight(.semibold)
+                    Spacer()
+                    Button(action: { viewStore.send(.delegate(.dismiss)) }) {
+                        Image(systemName: "xmark")
+                            .foregroundColor(.black).opacity(0.7)
+                    }
+                }
                 VStack(alignment: .leading, spacing: 5) {
                     Section {
                         HStack(spacing: 10) {
@@ -162,7 +170,6 @@ extension AddColorView {
             }
             .padding(20)
         }
-        .ignoresSafeArea()
     }
 }
 //MARK: - Preview

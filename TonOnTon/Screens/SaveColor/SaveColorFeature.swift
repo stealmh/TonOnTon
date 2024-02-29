@@ -41,7 +41,9 @@ struct SaveColorFeature: Reducer {
             case .destination(.presented(.addColor(.delegate(let addColorDelegate)))):
                 switch addColorDelegate {
                 case .saveButtonTapped(let color):
-                    print("color is \(color)")
+                    state.destination = nil
+                    return .none
+                case .dismiss:
                     state.destination = nil
                     return .none
                 }
