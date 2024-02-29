@@ -30,13 +30,12 @@ extension SaveColorView {
                     Image(systemName: "plus")
                 }
             }
-            .sheet(
+            .fullScreenCover(
               store: self.store.scope(state: \.$destination, action: { .destination($0) }),
               state: /SaveColorFeature.Destination.State.addColor,
               action: SaveColorFeature.Destination.Action.addColor
             ) { store in
                 AddColorView(store: store)
-                    .presentationDetents([.fraction(0.9)])
 //                    .interactiveDismissDisabled()
     //                .presentationBackground(.gray.opacity(0.6))
             }
