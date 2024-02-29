@@ -21,8 +21,21 @@ struct TabBarView: View {
 //MARK: - View
 extension TabBarView {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-//        TabView(selection: <#T##Binding<Hashable>?#>, content: <#T##() -> View#>)
+        TabView(selection: viewStore.binding(
+            get: \.selectedTab,
+            send: TabBarFeature.Action.tabSelected)) {
+                HomeView(store: self.store.scope(state: \.home, action: TabBarFeature.Action.home))
+                    .tag(TabBarFeature.Tab.home)
+                    .tabItem {
+                        Text("hello!")
+                    }
+                
+                SaveColorView(store: self.store.scope(state: \.saveColor, action: TabBarFeature.Action.saveColor))
+                    .tag(TabBarFeature.Tab.save)
+                    .tabItem {
+                        Text("save!")
+                    }
+            }
     }
 }
 //MARK: - Preview
