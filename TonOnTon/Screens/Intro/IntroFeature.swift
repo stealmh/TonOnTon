@@ -36,6 +36,9 @@ struct IntroFeature: Reducer {
                 return .none
             }
         }
+        .ifCaseLet(/State.splash, action: /Action.splash) {
+            SplashFeature()
+        }
         .ifCaseLet(/State.tabBar, action: /Action.tabBar) {
             TabBarFeature()
         }
