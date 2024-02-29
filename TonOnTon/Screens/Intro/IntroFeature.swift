@@ -20,6 +20,7 @@ struct IntroFeature: Reducer {
         case splash(SplashFeature.Action)
         case tabBar(TabBarFeature.Action)
         
+        case _changeScreen(State)
     }
     
     var body: some ReducerOf<Self> {
@@ -30,6 +31,9 @@ struct IntroFeature: Reducer {
                     case .moveToMain:
                     return .run { send in await send(._changeScreen(.tabBar(.init())), animation: .spring()) }
                 }
+            case let ._changeScreen(newState):
+                state = newState
+                return .none
             case .splash:
                 return .none
             case .tabBar:
