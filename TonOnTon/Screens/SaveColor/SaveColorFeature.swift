@@ -38,6 +38,13 @@ struct SaveColorFeature: Reducer {
             case .addButtonTapped:
                 state.destination = .addColor()
                 return .none
+            case .destination(.presented(.addColor(.delegate(let addColorDelegate)))):
+                switch addColorDelegate {
+                case .saveButtonTapped(let color):
+                    print("color is \(color)")
+                    state.destination = nil
+                    return .none
+                }
             case .destination:
                 return .none
             }
@@ -45,6 +52,5 @@ struct SaveColorFeature: Reducer {
         .ifLet(\.$destination, action: /Action.destination) {
             Destination()
         }
-        ._printChanges()
     }
 }
