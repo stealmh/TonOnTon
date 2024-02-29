@@ -28,6 +28,11 @@ extension IntroView {
                          action: IntroFeature.Action.splash) { store in
                     SplashView(store: store)
                 }
+            case .tabBar:
+                CaseLet(/IntroFeature.State.tabBar,
+                         action: IntroFeature.Action.tabBar) { store in
+                    TabBarView(store: store)
+                }
             }
         }
     }
