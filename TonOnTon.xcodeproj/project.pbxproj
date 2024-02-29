@@ -60,10 +60,6 @@
 				17E905FD2B900ECE00B251F8 /* Model */,
 				17E905FE2B900EDB00B251F8 /* Resources */,
 				17E905FF2B900EE900B251F8 /* Screens */,
-				17E905DE2B900A7C00B251F8 /* TonOnTonApp.swift */,
-				17E905E02B900A7C00B251F8 /* ContentView.swift */,
-				17E905E22B900A7D00B251F8 /* Assets.xcassets */,
-				17E905E42B900A7D00B251F8 /* Preview Content */,
 			);
 			path = TonOnTon;
 			sourceTree = "<group>";
@@ -79,6 +75,7 @@
 		17E905F22B900E2500B251F8 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				17E905DE2B900A7C00B251F8 /* TonOnTonApp.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -170,6 +167,8 @@
 		17E905FE2B900EDB00B251F8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				17E905E22B900A7D00B251F8 /* Assets.xcassets */,
+				17E905E42B900A7D00B251F8 /* Preview Content */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -177,6 +176,7 @@
 		17E905FF2B900EE900B251F8 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				17E905E02B900A7C00B251F8 /* ContentView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -386,7 +386,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"TonOnTon/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"TonOnTon/Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = 69AX92X75M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -415,7 +415,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"TonOnTon/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"TonOnTon/Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = 69AX92X75M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
