@@ -68,15 +68,6 @@
 			path = Intro;
 			sourceTree = "<group>";
 		};
-		1761104C2B90208A00FD847C /* Main */ = {
-			isa = PBXGroup;
-			children = (
-				176110512B9020B800FD847C /* Home */,
-				176110522B9020BE00FD847C /* Save */,
-			);
-			path = Main;
-			sourceTree = "<group>";
-		};
 		176110512B9020B800FD847C /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -239,7 +230,8 @@
 			children = (
 				176110422B90199200FD847C /* Intro */,
 				1761103D2B90125F00FD847C /* Splash */,
-				1761104C2B90208A00FD847C /* Main */,
+				176110512B9020B800FD847C /* Home */,
+				176110522B9020BE00FD847C /* Save */,
 				17E905E02B900A7C00B251F8 /* ContentView.swift */,
 			);
 			path = Screens;
