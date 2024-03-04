@@ -30,6 +30,8 @@
 		1761107B2B906E1D00FD847C /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 176110722B906E1C00FD847C /* Pretendard-Bold.otf */; };
 		1761107C2B906E1D00FD847C /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 176110732B906E1D00FD847C /* Pretendard-ExtraBold.otf */; };
 		176110802B906E9E00FD847C /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1761107F2B906E9E00FD847C /* Font+.swift */; };
+		176479072B954E43006C9FA2 /* SelectColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176479062B954E43006C9FA2 /* SelectColorView.swift */; };
+		176479092B954F59006C9FA2 /* SelectColorFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176479082B954F59006C9FA2 /* SelectColorFeature.swift */; };
 		17E905DF2B900A7C00B251F8 /* TonOnTonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E905DE2B900A7C00B251F8 /* TonOnTonApp.swift */; };
 		17E905E12B900A7C00B251F8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E905E02B900A7C00B251F8 /* ContentView.swift */; };
 		17E905E32B900A7D00B251F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17E905E22B900A7D00B251F8 /* Assets.xcassets */; };
@@ -62,6 +64,8 @@
 		176110732B906E1D00FD847C /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-ExtraBold.otf"; path = "../../../../../../Downloads/Pretendard-1.3.9 (1)/public/static/Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
 		1761107F2B906E9E00FD847C /* Font+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+.swift"; sourceTree = "<group>"; };
 		176110832B906F8600FD847C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		176479062B954E43006C9FA2 /* SelectColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectColorView.swift; sourceTree = "<group>"; };
+		176479082B954F59006C9FA2 /* SelectColorFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectColorFeature.swift; sourceTree = "<group>"; };
 		17E905DB2B900A7C00B251F8 /* TonOnTon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TonOnTon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17E905DE2B900A7C00B251F8 /* TonOnTonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TonOnTonApp.swift; sourceTree = "<group>"; };
 		17E905E02B900A7C00B251F8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -123,6 +127,8 @@
 				176110612B9042A100FD847C /* AddColor */,
 				1761105D2B9039AB00FD847C /* SaveColorView.swift */,
 				1761105F2B9039B200FD847C /* SaveColorFeature.swift */,
+				176479062B954E43006C9FA2 /* SelectColorView.swift */,
+				176479082B954F59006C9FA2 /* SelectColorFeature.swift */,
 			);
 			path = SaveColor;
 			sourceTree = "<group>";
@@ -407,7 +413,9 @@
 				17E905E12B900A7C00B251F8 /* ContentView.swift in Sources */,
 				17E905DF2B900A7C00B251F8 /* TonOnTonApp.swift in Sources */,
 				1761104B2B901EE200FD847C /* TabBarFeature.swift in Sources */,
+				176479092B954F59006C9FA2 /* SelectColorFeature.swift in Sources */,
 				176110462B9019BA00FD847C /* IntroFeature.swift in Sources */,
+				176479072B954E43006C9FA2 /* SelectColorView.swift in Sources */,
 				176110602B9039B200FD847C /* SaveColorFeature.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
