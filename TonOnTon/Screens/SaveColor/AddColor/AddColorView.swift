@@ -170,6 +170,7 @@ extension AddColorView {
             }
             .padding(20)
         }
+        .toolbar(.hidden, for: .tabBar)
     }
 }
 //MARK: - Preview
