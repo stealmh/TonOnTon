@@ -41,9 +41,16 @@ extension SaveColorView {
                 ) { store in
                     AddColorView(store: store)
                 }
+                .navigationDestination(
+                  store: self.store.scope(state: \.$destination, action: { .destination($0) }),
+                  state: /SaveColorFeature.Destination.State.photoColor,
+                  action: SaveColorFeature.Destination.Action.photoColor
+                ) { store in
+                    PhotoColorSelectView(store: store)
+                }
                 .fullScreenCover(
                   store: self.store.scope(state: \.$destination, action: { .destination($0) }),
-                  state: /SaveColorFeature.Destination.State.selectColor,
+                  state: /SaveColorFeature.Destination.State.selectColorSheet,
                   action: SaveColorFeature.Destination.Action.selectColor
                 ) { store in
                     SelectColorView(store: store)

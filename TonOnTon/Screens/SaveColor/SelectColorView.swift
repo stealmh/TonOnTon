@@ -32,7 +32,7 @@ struct SelectColorView: View {
                                 }
                         }
                         
-                        Button(action: {  }) {
+                        Button(action: { viewStore.send(.delegate(.photoSelectColor)) }) {
                             Capsule()
                                 .foregroundColor(.gray)
                                 .overlay {
