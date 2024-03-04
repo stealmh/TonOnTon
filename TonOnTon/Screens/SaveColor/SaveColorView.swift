@@ -21,25 +21,36 @@ struct SaveColorView: View {
 //MARK: - View
 extension SaveColorView {
     var body: some View {
-        NavigationStack {
-            VStack {
-                Text("Hello, this is Save Color View!")
-            }
-            .toolbar {
-                Button(action: { viewStore.send(.addButtonTapped) }) {
-                    Image(systemName: "plus")
+        ZStack {
+            Color.black.opacity(viewStore.state.viewColorDetect ? 0.7 : 0)
+                .zIndex(1)
+                .edgesIgnoringSafeArea(.all)
+            NavigationStack {
+                VStack {
+                    Text("Hello, this is Save Color View!")
                 }
-            }
-            .fullScreenCover(
-              store: self.store.scope(state: \.$destination, action: { .destination($0) }),
-              state: /SaveColorFeature.Destination.State.addColor,
-              action: SaveColorFeature.Destination.Action.addColor
-            ) { store in
-                AddColorView(store: store)
-//                    .interactiveDismissDisabled()
-    //                .presentationBackground(.gray.opacity(0.6))
-            }
+                .toolbar {
+                    Button(action: { viewStore.send(.addButtonTapped) }) {
+                        Image(systemName: "plus")
+                    }
+                }
+                .navigationDestination(
+                  store: self.store.scope(state: \.$destination, action: { .destination($0) }),
+                  state: /SaveColorFeature.Destination.State.addColor,
+                  action: SaveColorFeature.Destination.Action.addColor
+                ) { store in
+                    AddColorView(store: store)
+                }
+                .fullScreenCover(
+                  store: self.store.scope(state: \.$destination, action: { .destination($0) }),
+                  state: /SaveColorFeature.Destination.State.selectColor,
+                  action: SaveColorFeature.Destination.Action.selectColor
+                ) { store in
+                    SelectColorView(store: store)
+                        .presentationBackground(.clear)
+                }
 
+            }
         }
     }
 }
