@@ -44,6 +44,7 @@
 		1764791B2B9595F9006C9FA2 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1764791A2B9595F9006C9FA2 /* UIColorExtensions.swift */; };
 		1764791D2B95A513006C9FA2 /* CustomColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1764791C2B95A513006C9FA2 /* CustomColorPicker.swift */; };
 		1764791F2B95A56D006C9FA2 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1764791E2B95A56D006C9FA2 /* ColorExtensions.swift */; };
+		176FB3CC2B9EE70C001F5F20 /* SaveColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176FB3CB2B9EE70C001F5F20 /* SaveColor.swift */; };
 		17E905DF2B900A7C00B251F8 /* TonOnTonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E905DE2B900A7C00B251F8 /* TonOnTonApp.swift */; };
 		17E905E12B900A7C00B251F8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E905E02B900A7C00B251F8 /* ContentView.swift */; };
 		17E905E32B900A7D00B251F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17E905E22B900A7D00B251F8 /* Assets.xcassets */; };
@@ -90,6 +91,7 @@
 		1764791A2B9595F9006C9FA2 /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		1764791C2B95A513006C9FA2 /* CustomColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColorPicker.swift; sourceTree = "<group>"; };
 		1764791E2B95A56D006C9FA2 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
+		176FB3CB2B9EE70C001F5F20 /* SaveColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveColor.swift; sourceTree = "<group>"; };
 		17E905DB2B900A7C00B251F8 /* TonOnTon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TonOnTon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17E905DE2B900A7C00B251F8 /* TonOnTonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TonOnTonApp.swift; sourceTree = "<group>"; };
 		17E905E02B900A7C00B251F8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 			isa = PBXGroup;
 			children = (
 				176110682B90682B00FD847C /* CreateColor.swift */,
+				176FB3CB2B9EE70C001F5F20 /* SaveColor.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -445,6 +448,7 @@
 			files = (
 				176110652B9042B300FD847C /* AddColorFeature.swift in Sources */,
 				176110632B9042AD00FD847C /* AddColorView.swift in Sources */,
+				176FB3CC2B9EE70C001F5F20 /* SaveColor.swift in Sources */,
 				176110692B90682B00FD847C /* CreateColor.swift in Sources */,
 				1761103F2B90128300FD847C /* SplashFeature.swift in Sources */,
 				176110412B90128C00FD847C /* SplashView.swift in Sources */,
