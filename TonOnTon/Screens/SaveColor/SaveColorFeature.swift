@@ -40,6 +40,7 @@ struct SaveColorFeature: Reducer {
     
     enum Action: Equatable {
         case addButtonTapped
+        case modalDismiss
         case destination(PresentationAction<Destination.Action>)
     }
     
@@ -50,6 +51,10 @@ struct SaveColorFeature: Reducer {
 //                state.destination = .addColor()
                 state.destination = .selectColorSheet()
                 state.viewColorDetect = true
+                return .none
+            case .modalDismiss:
+                state.destination = nil
+                state.viewColorDetect = false
                 return .none
             case .destination(.presented(.selectColor(.delegate(let selectColorDelegate)))):
                 switch selectColorDelegate {
@@ -65,11 +70,14 @@ struct SaveColorFeature: Reducer {
                     state.viewColorDetect = false
                     state.destination = .addColor()
                     return .none
+                        await send(.modalDismiss)
                 }
             case .destination(.presented(.addColor(.delegate(let addColorDelegate)))):
                 switch addColorDelegate {
                 case .saveButtonTapped(let color):
-                    state.destination = nil
+                    state.nonGroupColor.append(color)
+                    return .run { send in await send(.modalDismiss) }
+//                    state.destination = nil
                     return .none
                 case .dismiss:
                     state.destination = nil
