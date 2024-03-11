@@ -15,6 +15,7 @@ struct SelectColorFeature: Reducer {
         enum Delegate: Equatable {
             case userSelectColor
             case photoSelectColor
+            case addGroup
             case dismiss
         }
     }

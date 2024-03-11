@@ -39,6 +39,14 @@ struct SelectColorView: View {
                                     Text("사진에서 색깔 선택하기")
                                 }
                         }
+                        
+                        Button(action: { viewStore.send(.delegate(.addGroup)) }) {
+                            Capsule()
+                                .foregroundColor(.gray)
+                                .overlay {
+                                    Text("그룹 추가하기")
+                                }
+                        }
                     }
                     .padding(10)
                 }
