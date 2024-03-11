@@ -6,6 +6,7 @@
 //
 
 import ComposableArchitecture
+import Foundation
 
 struct SaveColorFeature: Reducer {
     
@@ -36,11 +37,14 @@ struct SaveColorFeature: Reducer {
     struct State: Equatable {
         @PresentationState var destination: Destination.State?
         var viewColorDetect: Bool = false
+        var saveColor: IdentifiedArrayOf<SaveColor> = []
+        var nonGroupColor: IdentifiedArrayOf<CreateColor> = []
     }
     
     enum Action: Equatable {
         case addButtonTapped
         case modalDismiss
+        case itemWillAdd
         case destination(PresentationAction<Destination.Action>)
     }
     
@@ -56,6 +60,10 @@ struct SaveColorFeature: Reducer {
                 state.destination = nil
                 state.viewColorDetect = false
                 return .none
+            case .itemWillAdd:
+                let item = SaveColor(id: UUID(), title: "그룹 \(state.saveColor.count + 1)", Color: [])
+                state.saveColor.append(item)
+                return .none
             case .destination(.presented(.selectColor(.delegate(let selectColorDelegate)))):
                 switch selectColorDelegate {
                 case .dismiss:
@@ -70,7 +78,11 @@ struct SaveColorFeature: Reducer {
                     state.viewColorDetect = false
                     state.destination = .addColor()
                     return .none
+                case .addGroup:
+                    return .run { send in
                         await send(.modalDismiss)
+                        await send(.itemWillAdd, animation: .spring())
+                    }
                 }
             case .destination(.presented(.addColor(.delegate(let addColorDelegate)))):
                 switch addColorDelegate {
