@@ -12,7 +12,10 @@ struct SaveColorView: View {
     /// - Properties
     private let store: StoreOf<SaveColorFeature>
     @ObservedObject var viewStore: ViewStoreOf<SaveColorFeature>
-    
+    @State private var group: [Int] = [1,2,3]
+    let columns:[GridItem] = [GridItem(.flexible(), spacing: nil, alignment: .center),
+                              GridItem(.flexible(), spacing: nil, alignment: .center)]
+    @State private var testColor: [Color] = [.red, .orange, .yellow]
     init(store: StoreOf<SaveColorFeature>) {
         self.store = store
         self.viewStore = ViewStore(self.store, observe: { $0 })
@@ -27,7 +30,28 @@ extension SaveColorView {
                 .edgesIgnoringSafeArea(.all)
             NavigationStack {
                 VStack {
-                    Text("Hello, this is Save Color View!")
+                    if group.isEmpty {
+                        Text("저장된 컬러가 없어요🥲")
+                    } else {
+                        ScrollView {
+                            LazyVGrid(columns: columns) {
+                                ForEach(viewStore.state.saveColor, id: \.id) { item in
+                                    groupLayout(item)
+                                        
+                                }
+                            }
+                            .padding(.horizontal, 10)
+                        }
+                        
+                        Text("그룹을 지정해주세요")
+                        ScrollView(.horizontal) {
+                            LazyVGrid(columns: columns) {
+                                ForEach(viewStore.state.nonGroupColor, id: \.id) { item in
+                                    nonGroupColorLayout(item)
+                                }
+                            }
+                        }
+                    }
                 }
                 .toolbar {
                     Button(action: { viewStore.send(.addButtonTapped) }) {
@@ -61,6 +85,50 @@ extension SaveColorView {
         }
     }
 }
+//MARK: - Configure View
+extension SaveColorView {
+    @ViewBuilder
+    func groupLayout(_ item: SaveColor) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            RoundedRectangle(cornerRadius: 30)
+                .foregroundColor(.gray)
+                .frame(height: 150)
+                .overlay {
+                    VStack {
+                        Spacer()
+                        HStack {
+                            ForEach(testColor, id: \.self) { data in
+                                VStack {
+                                    Rectangle()
+                                        .foregroundColor(data).opacity(0.3)
+                                    Rectangle()
+                                        .foregroundColor(data)
+                                }
+                            }
+                        }
+                        RoundedRectangle(cornerRadius: 30)
+                            .foregroundColor(.black).opacity(0.2)
+                            .frame(height: 50)
+                            .overlay {
+                                Text("title")
+                            }
+                    }
+                }
+        }
+        
+    }
+    @ViewBuilder
+    func nonGroupColorLayout(_ item: CreateColor) -> some View {
+        VStack {
+            Rectangle()
+                .foregroundColor(item.shirtColor)
+                .frame(width: 70, height: 70)
+            Rectangle()
+                .foregroundColor(item.pantsColor)
+                .frame(width: 70, height: 70)
+        }
+    }
+}
 //MARK: - Preview
 struct SaveColorView_Previews: PreviewProvider {
     static var previews: some View {
@@ -72,3 +140,4 @@ struct SaveColorView_Previews: PreviewProvider {
         )
     }
 }
+
