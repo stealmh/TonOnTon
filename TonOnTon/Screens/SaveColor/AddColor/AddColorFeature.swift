@@ -12,14 +12,12 @@ struct AddColorFeature: Reducer {
     
     struct State: Equatable {
         var shirtSelectedColor: Color?
-        var shirtPointColor: Color?
         var pantsSelectedColor: Color?
         var saveButtonDetecter: Bool = false
     }
     
     enum Action: Equatable {
         case shirtColorSelected(Color)
-        case shirtPointColorSelected(Color)
         case pantsColorSelected(Color)
         case _saveButtonTapped
         
@@ -36,10 +34,6 @@ struct AddColorFeature: Reducer {
             state.shirtSelectedColor = selectColor
             return .none
             
-        case .shirtPointColorSelected(let selectColor):
-            state.shirtPointColor = selectColor
-            return .none
-            
         case .pantsColorSelected(let selectColor):
             state.pantsSelectedColor = selectColor
             return .none
@@ -48,8 +42,7 @@ struct AddColorFeature: Reducer {
             guard let shirtColor = state.shirtSelectedColor else { return .none }
             guard let pantsColor = state.pantsSelectedColor else { return .none }
             
-            let color = CreateColor(shirtColor: shirtColor,
-                                    shirtPointCOlor: state.shirtPointColor,
+            let color = CreateColor(id: UUID(), shirtColor: shirtColor,
                                     pantsColor: pantsColor)
             
             return .run { send in await send(.delegate(.saveButtonTapped(color))) }
