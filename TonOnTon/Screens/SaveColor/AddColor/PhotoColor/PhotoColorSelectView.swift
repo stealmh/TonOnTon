@@ -19,7 +19,7 @@ struct PhotoColorSelectView: View {
     @State private var myImage: Image?
     @State private var myImage2: UIImage?
     @State private var colorPicker: Color = .white
-    @State private var userselectColors: [UIColor] = []
+//    @State private var userselectColors: [UIColor] = []
     
     let columns:[GridItem] = [GridItem(.flexible(), spacing: nil, alignment: .center),
                               GridItem(.flexible(), spacing: nil, alignment: .center),
@@ -46,6 +46,7 @@ extension PhotoColorSelectView {
                             .clipped()
                             .padding(10)
                             .zIndex(1)
+                            .offset(x: -2, y: -3)
                         Text("선택")
                             .offset(x: 3)
                     }
@@ -75,7 +76,7 @@ extension PhotoColorSelectView {
                     LazyVGrid(columns: columns) {
                         ForEach(colorArray,id: \.self) { color in
                             RoundedRectangle(cornerRadius: 8)
-                                .stroke(userselectColors.contains(color) ? .red : .clear, lineWidth: 2)
+                                .stroke(viewStore.userselectColors.contains(color) ? .red : .clear, lineWidth: 2)
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 45)
                                 .padding(.horizontal,4)
@@ -89,31 +90,16 @@ extension PhotoColorSelectView {
                                         Text(color.hexString)
                                     }.font(.caption).foregroundColor(.white)
                                 }
-                                .onTapGesture {
-                                    if !userselectColors.contains(color) && userselectColors.count < 2 {
-                                        userselectColors.append(color)
-                                    } else {
-                                        if userselectColors.count == 2 && userselectColors.contains(color) {
-                                            userselectColors.removeAll { $0 == color }
-                                        }
-                                        
-                                        if userselectColors.count == 2 && !userselectColors.contains(color) {
-                                            /// animation: 흔들흔들
-                                        }
-                                        else {
-                                            userselectColors.removeAll { $0 == color }
-                                        }
-                                    }
-                                }
+                                .onTapGesture { viewStore.send(.colorTapped(color)) }
                         }
                     }
                 }
                 
                 Spacer()
-                Button(action: {}) {
+                Button(action: { viewStore.send(.delegate(.nextButtonTapped(viewStore.state.userselectColors))) }) {
                     Text("다음")
                 }
-                .opacity(userselectColors.count == 2 ? 1 : 0)
+                .opacity(viewStore.userselectColors.count == 2 ? 1 : 0)
             }
             .onChange(of: myImage2, perform: { uiImage in
                 guard let colors = myImage2?.dominantColors() else {return}
