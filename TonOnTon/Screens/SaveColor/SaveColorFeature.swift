@@ -7,6 +7,7 @@
 
 import ComposableArchitecture
 import Foundation
+import SwiftUI
 
 struct SaveColorFeature: Reducer {
     
@@ -64,6 +65,7 @@ struct SaveColorFeature: Reducer {
                 let item = SaveColor(id: UUID(), title: "그룹 \(state.saveColor.count + 1)", Color: [])
                 state.saveColor.append(item)
                 return .none
+            /// Delegate: 색깔 선택 창
             case .destination(.presented(.selectColor(.delegate(let selectColorDelegate)))):
                 switch selectColorDelegate {
                 case .dismiss:
@@ -84,6 +86,7 @@ struct SaveColorFeature: Reducer {
                         await send(.itemWillAdd, animation: .spring())
                     }
                 }
+            /// Delegate: 색깔 직접 입력 창
             case .destination(.presented(.addColor(.delegate(let addColorDelegate)))):
                 switch addColorDelegate {
                 case .saveButtonTapped(let color):
@@ -94,6 +97,20 @@ struct SaveColorFeature: Reducer {
                 case .dismiss:
                     state.destination = nil
                     return .none
+                }
+            case .destination(.presented(.photoColor(.delegate(let photoColorDelegate)))):
+                switch photoColorDelegate {
+                case .nextButtonTapped(let colors):
+                    guard let uiColorFirst = colors.first,
+                          let uiColorSecond = colors.last else {
+                        print("return")
+                        return .none }
+                    let firstColor = Color(uiColor: uiColorFirst)
+                    let secondColor = Color(uiColor: uiColorSecond)
+                    let color = CreateColor(id: UUID(), shirtColor: firstColor, pantsColor: secondColor)
+                    state.nonGroupColor.append(color)
+                    
+                    return .run { send in await send(.modalDismiss) }
                 }
             case .destination:
                 return .none
