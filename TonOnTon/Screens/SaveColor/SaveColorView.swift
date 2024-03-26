@@ -17,6 +17,7 @@ struct SaveColorView: View {
                               GridItem(.flexible(), spacing: nil, alignment: .center)]
 //    @State private var testColor: [Color] = [.red, .orange, .yellow]
     @State private var testColor: [Color] = []
+    @State private var draggedColor: CreateColor?
     init(store: StoreOf<SaveColorFeature>) {
         self.store = store
         self.viewStore = ViewStore(self.store, observe: { $0 })
@@ -37,10 +38,14 @@ extension SaveColorView {
                         ScrollView {
                             LazyVGrid(columns: columns) {
                                 ForEach(viewStore.state.saveColor, id: \.id) { item in
-                                    groupLayout(item)
+                                    groupLayout(item.color)
+                                        .onDrop(of: [.text],
+                                                delegate: MyDropDelegate(draggedItem: $draggedColor,
+                                                                         action: { dragColor in
+                                            viewStore.send(.colorAddGroup(id: item.id, dragColor: dragColor), animation: .spring())
+                                        }))
                                         
                                 }
-                                .onDrop(of: [.plainText], delegate: MyDropDelegate(testColor: $testColor))
                             }
                             .padding(.horizontal, 10)
                         }
@@ -50,8 +55,10 @@ extension SaveColorView {
                             VStack {
                                 ForEach(viewStore.state.nonGroupColor, id: \.id) { item in
                                     nonGroupColorLayout(item)
+                                    /// 끌어오는 곳
                                         .onDrag {
-                                            return NSItemProvider(object: String(item.pantsColor.description) as NSString)
+                                            self.draggedColor = item
+                                            return NSItemProvider()
                                         }
                                 }
                             }
@@ -67,46 +74,30 @@ extension SaveColorView {
         }
     }
 }
-struct MyDropDelegate: DropDelegate {
-    @Binding var testColor: [Color]
-    
-    func performDrop(info: DropInfo) -> Bool {
-        print(#function)
-        // 드롭 이벤트를 처리하고 성공 여부를 반환합니다.
-        guard let itemProvider = info.itemProviders(for: [.plainText]).first else {
-            return false
+extension SaveColorView {
+    struct MyDropDelegate: DropDelegate {
+        @Binding var draggedItem: CreateColor?
+        var action: (CreateColor) -> ()?
+        
+        func performDrop(info: DropInfo) -> Bool {
+            guard let draggedItem else { return false }
+            action(draggedItem)
+            return true
+        }
+
+        func dropEntered(info: DropInfo) {
+            print(#function)
         }
         
-        itemProvider.loadObject(ofClass: NSString.self) { string, error in
-            guard let colorString = string as? String else { return }
-            
-            DispatchQueue.main.async {
-//                if let color = Color(colorString) {
-//                    self.testColor.append(color)
-//                }
-                let color = Color(colorString)
-                self.testColor.append(color)
-                
-            }
+        func dropExited(info: DropInfo) {
+            print(#function)
         }
-        return true
-    }
-    
-    // 옵셔널한 메서드들은 필요에 따라 구현할 수 있습니다.
-    func dropEntered(info: DropInfo) {
-        print(#function)
-        // 드롭 영역에 들어왔을 때의 동작을 정의합니다.
-    }
-    
-    func dropExited(info: DropInfo) {
-        print(#function)
-        // 드롭 영역을 벗어났을 때의 동작을 정의합니다.
     }
 }
 //MARK: - Configure View
 extension SaveColorView {
     @ViewBuilder
-    func groupLayout(_ item: SaveColor) -> some View {
+    func groupLayout(_ item: [CreateColor]) -> some View {
         VStack(alignment: .leading, spacing: 0) {
             RoundedRectangle(cornerRadius: 30)
                 .foregroundColor(.gray)
@@ -115,12 +106,12 @@ extension SaveColorView {
                     VStack {
                         Spacer()
                         HStack {
-                            ForEach(testColor, id: \.self) { data in
+                            ForEach(item, id: \.id) { closeColor in
                                 VStack {
                                     Rectangle()
-                                        .foregroundColor(data).opacity(0.3)
+                                        .foregroundColor(closeColor.shirtColor)
                                     Rectangle()
-                                        .foregroundColor(data)
+                                        .foregroundColor(closeColor.pantsColor)
                                 }
                             }
                         }

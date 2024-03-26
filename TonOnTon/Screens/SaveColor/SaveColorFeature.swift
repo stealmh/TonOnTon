@@ -44,6 +44,7 @@ struct SaveColorFeature: Reducer {
     
     enum Action: Equatable {
         case addButtonTapped
+        case colorAddGroup(id: UUID, dragColor: CreateColor)
         case modalDismiss
         case itemWillAdd
         case destination(PresentationAction<Destination.Action>)
@@ -57,14 +58,22 @@ struct SaveColorFeature: Reducer {
                 state.destination = .selectColorSheet()
                 state.viewColorDetect = true
                 return .none
+                
+            case .colorAddGroup(let id, let dragColor):
+                state.saveColor[id: id]?.color.append(dragColor)
+                return .none
+                
+                
             case .modalDismiss:
                 state.destination = nil
                 state.viewColorDetect = false
                 return .none
+                
             case .itemWillAdd:
-                let item = SaveColor(id: UUID(), title: "그룹 \(state.saveColor.count + 1)", Color: [])
+                let item = SaveColor(id: UUID(), title: "그룹 \(state.saveColor.count + 1)", color: [])
                 state.saveColor.append(item)
                 return .none
+                
             /// Delegate: 색깔 선택 창
             case .destination(.presented(.selectColor(.delegate(let selectColorDelegate)))):
                 switch selectColorDelegate {
@@ -86,6 +95,7 @@ struct SaveColorFeature: Reducer {
                         await send(.itemWillAdd, animation: .spring())
                     }
                 }
+                
             /// Delegate: 색깔 직접 입력 창
             case .destination(.presented(.addColor(.delegate(let addColorDelegate)))):
                 switch addColorDelegate {
@@ -98,6 +108,7 @@ struct SaveColorFeature: Reducer {
                     state.destination = nil
                     return .none
                 }
+                
             case .destination(.presented(.photoColor(.delegate(let photoColorDelegate)))):
                 switch photoColorDelegate {
                 case .nextButtonTapped(let colors):
@@ -112,6 +123,7 @@ struct SaveColorFeature: Reducer {
                     
                     return .run { send in await send(.modalDismiss) }
                 }
+                
             case .destination:
                 return .none
             }

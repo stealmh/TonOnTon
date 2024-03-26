@@ -12,5 +12,5 @@ import SwiftUI
 struct SaveColor: Equatable, Identifiable {
     var id: UUID
     let title: String
-    let Color: [Color]
+    var color: [CreateColor]
 }
