@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  TonOnTon
 //
-//  Created by DEV IOS on 2024/02/29.
+//  Created by mino on 2024/02/29.
 //
 
 import SwiftUI

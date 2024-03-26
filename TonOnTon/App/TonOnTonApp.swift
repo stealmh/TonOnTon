@@ -2,16 +2,17 @@
 //  TonOnTonApp.swift
 //  TonOnTon
 //
-//  Created by DEV IOS on 2024/02/29.
+//  Created by mino on 2024/02/29.
 //
 
+import ComposableArchitecture
 import SwiftUI
 
 @main
 struct TonOnTonApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            IntroView(store: Store(initialState: .init(), reducer: { IntroFeature() }))
         }
     }
 }
